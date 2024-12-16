@@ -399,8 +399,13 @@ function reverseWords(str) {
  *   invertCase('JavaScript is Fun') => 'jAVAsCRIPT IS fUN'
  *   invertCase('12345') => '12345'
  */
-function invertCase(/* str */) {
-  throw new Error('Not implemented');
+function invertCase(str) {
+  return str
+    .split('')
+    .map((item) =>
+      item === item.toUpperCase() ? item.toLowerCase() : item.toUpperCase()
+    )
+    .join('');
 }
 
 /**
@@ -430,8 +435,10 @@ function getStringFromTemplate(firstName, lastName) {
  *   extractNameFromTemplate('Hello, John Doe!') => 'John Doe'
  *   extractNameFromTemplate('Hello, Chuck Norris!') => 'Chuck Norris'
  */
-function extractNameFromTemplate(/* value */) {
-  throw new Error('Not implemented');
+function extractNameFromTemplate(value) {
+  const arr = value.split(' ');
+  const lastName = arr[2].slice(0, -1);
+  return `${arr[1]} ${lastName}`;
 }
 
 /**
@@ -484,8 +491,18 @@ function extractEmails(str) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  let codeWord = '';
+  for (let i = 0; i < str.length; i += 1) {
+    let code = str[i].charCodeAt(0);
+    if ((code >= 65 && code < 78) || (code >= 97 && code < 110)) {
+      code += 13;
+    } else if ((code >= 78 && code <= 90) || (code >= 110 && code <= 122)) {
+      code -= 13;
+    }
+    codeWord += String.fromCharCode(code);
+  }
+  return codeWord;
 }
 
 /**
@@ -512,8 +529,11 @@ function encodeToRot13(/* str */) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+function getCardId(value) {
+  return (
+    '♣♦♥♠'.indexOf(value[value.length - 1]) * 13 +
+    'A234567891JQK'.indexOf(value[0])
+  );
 }
 
 module.exports = {
